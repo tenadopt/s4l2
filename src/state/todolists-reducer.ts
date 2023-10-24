@@ -93,24 +93,18 @@ export const changeTodolistFilterAC = (id: string, filter: FilterValuesType): Ch
     return {type: 'CHANGE-TODOLIST-FILTER', id: id, filter: filter}
 }
 
-export const setTodolistAC = (todos: Array<TodolistType>) => {
-    return {
-        type: 'SET-TODOLISTS',
-        todos
-    } as const
-}
+export const setTodolistAC = (todos: Array<TodolistType>) => ({type: 'SET-TODOLISTS', todos} as const)
 
 export type SetTodolistActionType = ReturnType<typeof setTodolistAC>
 
 // THUNK
 
 export const getTodoTC = () => (dispatch: Dispatch) => {
-    debugger
     todolistsAPI.getTodolists()
         .then((res) => {
-            debugger
             dispatch(setTodolistAC(res.data))
         })
 }
 
-export type AppDispatch = ThunkDispatch<AppRootStateType, unknown, AnyAction>;
+
+
